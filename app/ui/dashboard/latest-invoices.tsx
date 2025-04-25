@@ -1,13 +1,12 @@
-import { ArrowPathIcon } from '@heroicons/react/24/outline';
-import clsx from 'clsx';
-import Image from 'next/image';
-import { lusitana } from '@/app/ui/fonts';
-import { LatestInvoice } from '@/app/lib/definitions';
-export default async function LatestInvoices({
-  latestInvoices,
-}: {
-  latestInvoices: LatestInvoice[];
-}) {
+import { ArrowPathIcon } from '@heroicons/react/24/outline'
+import clsx from 'clsx'
+import Image from 'next/image'
+import { lusitana } from '@/app/ui/fonts'
+import { LatestInvoice } from '@/app/lib/definitions'
+import { fetchLatestInvoices } from '@/app/lib/data'
+
+export default async function LatestInvoices() {
+  const latestInvoices: LatestInvoice[] = await fetchLatestInvoices()
   return (
     <div className="flex w-full flex-col md:col-span-4">
       <h2 className={`${lusitana.className} mb-4 text-xl md:text-2xl`}>
@@ -25,7 +24,7 @@ export default async function LatestInvoices({
                   'flex flex-row items-center justify-between py-4',
                   {
                     'border-t': i !== 0,
-                  },
+                  }
                 )}
               >
                 <div className="flex items-center">
@@ -51,7 +50,7 @@ export default async function LatestInvoices({
                   {invoice.amount}
                 </p>
               </div>
-            );
+            )
           })}
         </div>
         <div className="flex items-center pb-2 pt-6">
@@ -60,5 +59,5 @@ export default async function LatestInvoices({
         </div>
       </div>
     </div>
-  );
+  )
 }
